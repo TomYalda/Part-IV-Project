@@ -22,7 +22,7 @@ def compute_multiclass_metrics(ground_truth_path, predictions_path, output_csv_p
     ground_truth = parse_prediction_style_file(ground_truth_path)
     predictions = parse_prediction_style_file(predictions_path)
 
-    # Automatically detect all unique classes in ground truth and predictions
+    # Automatically detect all unique classes
     all_labels = sorted(list(set(ground_truth.values()) | set(predictions.values())))
 
     y_true = []
@@ -39,21 +39,33 @@ def compute_multiclass_metrics(ground_truth_path, predictions_path, output_csv_p
         print("🚫 No valid matched entries between files.")
         return
 
-    # Metrics
-    precision = precision_score(y_true, y_pred, average=None, labels=all_labels, zero_division=0)
-    recall = recall_score(y_true, y_pred, average=None, labels=all_labels, zero_division=0)
+    # Accuracy
     accuracy = accuracy_score(y_true, y_pred)
 
-    # Write to CSV
+    # Classification report (as dictionary)
+    report_dict = classification_report(
+        y_true, y_pred, labels=all_labels, output_dict=True, zero_division=0
+    )
+
+    # Write full classification report to CSV
     with open(output_csv_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(['Class', 'Precision', 'Recall'])
-        for cls, p, r in zip(all_labels, precision, recall):
-            writer.writerow([cls, f"{p:.4f}", f"{r:.4f}"])
-        writer.writerow([])
-        writer.writerow(['Overall Accuracy', f"{accuracy:.4f}"])
+        writer.writerow(['Class', 'Precision', 'Recall', 'F1-score', 'Support'])
 
-    # Print report
+        for cls in all_labels + ['accuracy', 'macro avg', 'weighted avg']:
+            if cls == 'accuracy':
+                writer.writerow([cls, '', '', f"{accuracy:.4f}", f"{len(y_true)}"])
+            else:
+                row = report_dict.get(cls, {})
+                writer.writerow([
+                    cls,
+                    f"{row.get('precision', 0):.4f}",
+                    f"{row.get('recall', 0):.4f}",
+                    f"{row.get('f1-score', 0):.4f}",
+                    int(row.get('support', 0))
+                ])
+
+    # Print to console
     print("\n📊 Classification Report:")
     print(classification_report(y_true, y_pred, labels=all_labels, zero_division=0))
 

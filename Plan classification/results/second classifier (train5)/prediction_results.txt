@@ -1,0 +1,288 @@
+Image: ADDITIONAL PLANS_INFORMATION (1098600)_10.jpg   --------   Predicted class: structural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1098600)_11.jpg   --------   Predicted class: structural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1098600)_7.jpg   --------   Predicted class: structural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1098600)_8.jpg   --------   Predicted class: structural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1098600)_9.jpg   --------   Predicted class: structural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_14.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_15.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_16.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_17.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_18.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_4.jpg   --------   Predicted class: civil with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_42.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_43.jpg   --------   Predicted class: architectural with probability 0.98
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_44.jpg   --------   Predicted class: architectural with probability 0.94
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_55.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_56.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_57.jpg   --------   Predicted class: architectural with probability 0.99
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_58.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_59.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_6.jpg   --------   Predicted class: civil with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_60.jpg   --------   Predicted class: architectural with probability 0.98
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_61.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_62.jpg   --------   Predicted class: architectural with probability 0.99
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_63.jpg   --------   Predicted class: architectural with probability 0.98
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_64.jpg   --------   Predicted class: architectural with probability 0.96
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_65.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_66.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_67.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_68.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_69.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_70.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_71.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_72.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_73.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_74.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_75.jpg   --------   Predicted class: architectural with probability 0.99
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_76.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_77.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_78.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_79.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_80.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_81.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_82.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_83.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_84.jpg   --------   Predicted class: architectural with probability 0.99
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_85.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_86.jpg   --------   Predicted class: civil with probability 0.57
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_87.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_88.jpg   --------   Predicted class: architectural with probability 0.98
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_90.jpg   --------   Predicted class: architectural with probability 0.99
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_91.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_92.jpg   --------   Predicted class: architectural with probability 0.95
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_93.jpg   --------   Predicted class: architectural with probability 0.86
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_94.jpg   --------   Predicted class: architectural with probability 1.00
+Image: ADDITIONAL PLANS_INFORMATION (1137860)_95.jpg   --------   Predicted class: architectural with probability 0.95
+Image: ADDITIONAL PLANS_INFORMATION - STRUCTURAL CALCS FOR SHEDS OVER FOOTPATH (1219755)_10.jpg   --------   Predicted class: architectural with probability 0.76
+Image: AMENDED PLAN APPLICATION (1077789)_27.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_28.jpg   --------   Predicted class: architectural with probability 0.99
+Image: AMENDED PLAN APPLICATION (1077789)_29.jpg   --------   Predicted class: architectural with probability 0.98
+Image: AMENDED PLAN APPLICATION (1077789)_30.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_31.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_32.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_33.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_34.jpg   --------   Predicted class: architectural with probability 0.80
+Image: AMENDED PLAN APPLICATION (1077789)_35.jpg   --------   Predicted class: architectural with probability 0.83
+Image: AMENDED PLAN APPLICATION (1077789)_36.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_37.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_38.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_39.jpg   --------   Predicted class: architectural with probability 0.99
+Image: AMENDED PLAN APPLICATION (1077789)_40.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_41.jpg   --------   Predicted class: architectural with probability 0.70
+Image: AMENDED PLAN APPLICATION (1077789)_42.jpg   --------   Predicted class: architectural with probability 0.60
+Image: AMENDED PLAN APPLICATION (1077789)_43.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_44.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_45.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_46.jpg   --------   Predicted class: architectural with probability 0.99
+Image: AMENDED PLAN APPLICATION (1077789)_47.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_48.jpg   --------   Predicted class: architectural with probability 0.99
+Image: AMENDED PLAN APPLICATION (1077789)_49.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_50.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_51.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_52.jpg   --------   Predicted class: architectural with probability 0.96
+Image: AMENDED PLAN APPLICATION (1077789)_53.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_54.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_55.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_56.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_57.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_58.jpg   --------   Predicted class: electrical with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_59.jpg   --------   Predicted class: electrical with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_60.jpg   --------   Predicted class: electrical with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_61.jpg   --------   Predicted class: electrical with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_62.jpg   --------   Predicted class: electrical with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_63.jpg   --------   Predicted class: electrical with probability 1.00
+Image: AMENDED PLAN APPLICATION (1077789)_65.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_101.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_102.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_103.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_104.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_105.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_106.jpg   --------   Predicted class: structural with probability 0.99
+Image: AMENDED PLAN APPLICATION (1162393)_107.jpg   --------   Predicted class: structural with probability 0.99
+Image: AMENDED PLAN APPLICATION (1162393)_108.jpg   --------   Predicted class: architectural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_109.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_110.jpg   --------   Predicted class: architectural with probability 0.82
+Image: AMENDED PLAN APPLICATION (1162393)_111.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_112.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_113.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_114.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_115.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_116.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_122.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_123.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_124.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_125.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_126.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_132.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_133.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_134.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_135.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_136.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_137.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162393)_74.jpg   --------   Predicted class: fire_protection with probability 0.97
+Image: AMENDED PLAN APPLICATION (1162393)_94.jpg   --------   Predicted class: structural with probability 0.87
+Image: AMENDED PLAN APPLICATION (1162742)_13.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_14.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_15.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_16.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_17.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_18.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_19.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_20.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_21.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_22.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_23.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_24.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_25.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_26.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_27.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_28.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_29.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_30.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_31.jpg   --------   Predicted class: structural with probability 0.98
+Image: AMENDED PLAN APPLICATION (1162742)_32.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLAN APPLICATION (1162742)_33.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_10.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_11.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_12.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_13.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_14.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_15.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_16.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_17.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_18.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_19.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_2.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_3.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_4.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_5.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_6.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_7.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_8.jpg   --------   Predicted class: structural with probability 1.00
+Image: AMENDED PLANS (1178495)_9.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_103.jpg   --------   Predicted class: architectural with probability 0.70
+Image: APPLICATION (1052039)_106.jpg   --------   Predicted class: architectural with probability 0.55
+Image: APPLICATION (1052039)_108.jpg   --------   Predicted class: architectural with probability 0.57
+Image: APPLICATION (1052039)_114.jpg   --------   Predicted class: structural with probability 0.66
+Image: APPLICATION (1052039)_116.jpg   --------   Predicted class: architectural with probability 0.50
+Image: APPLICATION (1052039)_117.jpg   --------   Predicted class: structural with probability 0.92
+Image: APPLICATION (1052039)_119.jpg   --------   Predicted class: structural with probability 0.56
+Image: APPLICATION (1052039)_279.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_280.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_281.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_297.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_298.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_300.jpg   --------   Predicted class: structural with probability 0.98
+Image: APPLICATION (1052039)_301.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_302.jpg   --------   Predicted class: architectural with probability 0.73
+Image: APPLICATION (1052039)_303.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_304.jpg   --------   Predicted class: structural with probability 0.94
+Image: APPLICATION (1052039)_305.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_306.jpg   --------   Predicted class: structural with probability 0.93
+Image: APPLICATION (1052039)_307.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_308.jpg   --------   Predicted class: structural with probability 0.95
+Image: APPLICATION (1052039)_309.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_310.jpg   --------   Predicted class: architectural with probability 0.62
+Image: APPLICATION (1052039)_311.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_312.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_313.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_314.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_315.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_316.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_317.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_318.jpg   --------   Predicted class: structural with probability 0.99
+Image: APPLICATION (1052039)_319.jpg   --------   Predicted class: structural with probability 0.96
+Image: APPLICATION (1052039)_320.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_321.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_322.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_323.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_324.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_325.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_326.jpg   --------   Predicted class: structural with probability 0.83
+Image: APPLICATION (1052039)_327.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_328.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_329.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_330.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_331.jpg   --------   Predicted class: structural with probability 0.99
+Image: APPLICATION (1052039)_61.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_62.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_63.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_73.jpg   --------   Predicted class: structural with probability 1.00
+Image: APPLICATION (1052039)_75.jpg   --------   Predicted class: plumbing with probability 0.71
+Image: AS BUILT (MEETING ROOM) (1658427)_14.jpg   --------   Predicted class: electrical with probability 1.00
+Image: Amended Plan Application SR 112081 (646305)_7.jpg   --------   Predicted class: architectural with probability 0.68
+Image: Application (1063296)_120.jpg   --------   Predicted class: architectural with probability 1.00
+Image: Application (1063296)_129.jpg   --------   Predicted class: architectural with probability 0.99
+Image: Application (1063296)_130.jpg   --------   Predicted class: architectural with probability 0.98
+Image: Application (1063296)_166.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_172.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_173.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_190.jpg   --------   Predicted class: architectural with probability 1.00
+Image: Application (1063296)_191.jpg   --------   Predicted class: architectural with probability 0.99
+Image: Application (1063296)_222.jpg   --------   Predicted class: structural with probability 0.98
+Image: Application (1063296)_243.jpg   --------   Predicted class: structural with probability 0.76
+Image: Application (1063296)_250.jpg   --------   Predicted class: structural with probability 0.90
+Image: Application (1063296)_275.jpg   --------   Predicted class: structural with probability 0.87
+Image: Application (1063296)_282.jpg   --------   Predicted class: structural with probability 0.93
+Image: Application (1063296)_287.jpg   --------   Predicted class: plumbing with probability 0.98
+Image: Application (1063296)_288.jpg   --------   Predicted class: plumbing with probability 0.94
+Image: Application (1063296)_289.jpg   --------   Predicted class: plumbing with probability 0.61
+Image: Application (1063296)_290.jpg   --------   Predicted class: plumbing with probability 0.88
+Image: Application (1063296)_291.jpg   --------   Predicted class: structural with probability 0.55
+Image: Application (1063296)_40.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_41.jpg   --------   Predicted class: electrical with probability 0.83
+Image: Application (1063296)_45.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_500.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_501.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_502.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_503.jpg   --------   Predicted class: structural with probability 1.00
+Image: Application (1063296)_63.jpg   --------   Predicted class: structural with probability 0.98
+Image: Application (1063296)_78.jpg   --------   Predicted class: architectural with probability 1.00
+Image: Application (1170233)_584.jpg   --------   Predicted class: structural with probability 0.99
+Image: Application (1170233)_585.jpg   --------   Predicted class: services_coordination with probability 0.96
+Image: Application (1170233)_586.jpg   --------   Predicted class: plumbing with probability 0.61
+Image: CERT OF TITLE (1483357)_2.jpg   --------   Predicted class: civil with probability 1.00
+Image: Combined Drawing Henderson_189.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: Combined Drawing Henderson_194.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: Combined Drawing Henderson_195.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: DRAINAGE QA - 3 (1395883)_5.jpg   --------   Predicted class: services_coordination with probability 1.00
+Image: DRAINAGE QA - 4 (1395884)_4.jpg   --------   Predicted class: services_coordination with probability 1.00
+Image: DRAINAGE QA - 5 (1395889)_3.jpg   --------   Predicted class: services_coordination with probability 1.00
+Image: DRAINAGE QA - 6 (1395890)_2.jpg   --------   Predicted class: fire_protection with probability 0.68
+Image: DRAWINGS PART 3 OF 5) (783067)_7.jpg   --------   Predicted class: architectural with probability 1.00
+Image: DRAWINGS PART 3 OF 5) (783067)_8.jpg   --------   Predicted class: architectural with probability 1.00
+Image: SR 182627 - FIRE REPORT - 9 BUNNY STREET (1327336)_44.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: SR 182627 - FIRE REPORT - 9 BUNNY STREET (1327336)_45.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: SR 182627 - FIRE REPORT - 9 BUNNY STREET (1327336)_46.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_375.jpg   --------   Predicted class: architectural with probability 0.56
+Image: WCC_DM_PRD-#1171173-v1-Application_378.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_379.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_380.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_381.jpg   --------   Predicted class: plumbing with probability 0.97
+Image: WCC_DM_PRD-#1171173-v1-Application_382.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_383.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_384.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_386.jpg   --------   Predicted class: plumbing with probability 0.62
+Image: WCC_DM_PRD-#1171173-v1-Application_388.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_389.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_397.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_398.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_399.jpg   --------   Predicted class: fire_protection with probability 0.97
+Image: WCC_DM_PRD-#1171173-v1-Application_488.jpg   --------   Predicted class: fire_protection with probability 1.00
+Image: WCC_DM_PRD-#1171173-v1-Application_639.jpg   --------   Predicted class: fire_protection with probability 0.95
+Image: WCC_DM_PRD-#1171173-v1-Application_648.jpg   --------   Predicted class: fire_protection with probability 0.94
+Image: WCC_DM_PRD-#1305701-v1-ADDITIONAL_PLANS_INFORMATION_24.jpg   --------   Predicted class: civil with probability 0.77
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_252.jpg   --------   Predicted class: mechanical with probability 1.00
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_253.jpg   --------   Predicted class: mechanical with probability 1.00
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_254.jpg   --------   Predicted class: mechanical with probability 1.00
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_255.jpg   --------   Predicted class: mechanical with probability 1.00
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_256.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_257.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_258.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1394322-v1-AMENDED_PLAN_PPLICATION_259.jpg   --------   Predicted class: plumbing with probability 1.00
+Image: WCC_DM_PRD-#1445963-v1-UPDATED_SERVICES_DRAWINGS_PRIOR_TO_AMENDMENT_1_50.jpg   --------   Predicted class: mechanical with probability 0.81
+Image: WCC_DM_PRD-#1445963-v1-UPDATED_SERVICES_DRAWINGS_PRIOR_TO_AMENDMENT_1_51.jpg   --------   Predicted class: mechanical with probability 1.00
+Image: WCC_DM_PRD-#1445963-v1-UPDATED_SERVICES_DRAWINGS_PRIOR_TO_AMENDMENT_1_52.jpg   --------   Predicted class: mechanical with probability 0.93
+Image: WCC_DM_PRD-#1445963-v1-UPDATED_SERVICES_DRAWINGS_PRIOR_TO_AMENDMENT_1_53.jpg   --------   Predicted class: mechanical with probability 1.00
+Image: WCC_DM_PRD-#1445963-v1-UPDATED_SERVICES_DRAWINGS_PRIOR_TO_AMENDMENT_1_54.jpg   --------   Predicted class: mechanical with probability 1.00
+Image: WCC_DM_PRD-#1656297-v1-AS_BUILT_SPRINKLER_5.jpg   --------   Predicted class: fire_protection with probability 1.00

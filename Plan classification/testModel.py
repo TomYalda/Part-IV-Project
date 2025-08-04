@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 # Load the best weights from the previous run
-model = YOLO("runs/classify/train4/weights/best.pt")
+model = YOLO("runs/classify/train5/weights/best.pt")
 
 # Predict on new data
 predictions = model.predict(
