@@ -1,0 +1,13 @@
+Class,Precision,Recall,F1-score,Support
+architectural,0.3978,0.9737,0.5649,38
+civil,0.4000,0.6667,0.5000,3
+electrical,0.8750,0.6364,0.7368,11
+fire_protection,0.7333,1.0000,0.8462,11
+mechanical,0.9091,0.7692,0.8333,13
+plumbing,0.9167,0.7857,0.8462,14
+services_coordination,0.4286,0.7500,0.5455,4
+site_plan,0.0000,0.0000,0.0000,1
+structural,0.9708,0.6891,0.8061,193
+accuracy,,,0.7431,288
+macro avg,0.6257,0.6968,0.6310,288
+weighted avg,0.8602,0.7431,0.7667,288
