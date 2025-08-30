@@ -3,11 +3,11 @@ import numpy as np
 import os
 
 # Load the best weights from the previous run
-model = YOLO("runs/classify/train8/weights/best.pt")
+model = YOLO("runs/classify/train21/weights/best.pt")
 
 # Predict on new data
 predictions = model.predict(
-    source=r'C:\Users\Administrator\Documents\data\plan_classification\test',
+    source=r"C:/Users/Administrator/Documents/data/plan_classification/split-data/test",
     stream=True,
 )
 

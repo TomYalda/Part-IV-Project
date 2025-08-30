@@ -26,14 +26,14 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 
 # Data generators
 train_generator = train_datagen.flow_from_directory(
-    'data/trainingData',
+    r"C:\Users\Administrator\Documents\data\text_classification\trainingData",
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='binary'
 )
 
 validation_generator = test_datagen.flow_from_directory(
-    'data/testingData/validationData',
+    r"C:\Users\Administrator\Documents\data\text_classification\testingData\validationData",
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='binary'
