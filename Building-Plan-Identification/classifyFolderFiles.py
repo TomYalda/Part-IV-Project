@@ -5,16 +5,16 @@ import numpy as np
 import os
 
 # Load the trained model
-model = load_model('best_classifier.h5')
+model = load_model('earlyStopClassifier_xlarge1409.h5')
 
 # Class names should match the order from the training generator
 class_names = ['Documents', 'StructuralPlans']
 
 # Directory containing test images
-test_dir = r"C:\Users\Administrator\Documents\data\text_classification\testingData\manualValidationData"
+test_dir = 'data/testingData/manualValidationData'
 
 # Prepare output file
-output_file = 'classifiersDeterminations.txt' 
+output_file = 'earlyStopXLargeClassifiersDeterminations.txt' 
 with open(output_file, 'w') as f:
     # Get all file paths and sort them by file size (ascending)
     files = [f for f in os.listdir(test_dir) if os.path.isfile(os.path.join(test_dir, f))]
@@ -23,7 +23,7 @@ with open(output_file, 'w') as f:
         img_path = os.path.join(test_dir, img_name)
         try:
             # Load and preprocess the image
-            img = image.load_img(img_path, target_size=(600, 600))
+            img = image.load_img(img_path, target_size=(900, 900))
             img_array = image.img_to_array(img)
             img_array = np.expand_dims(img_array, axis=0)
             img_array /= 255.0  # Normalize same as training

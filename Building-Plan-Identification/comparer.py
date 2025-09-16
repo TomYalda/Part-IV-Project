@@ -1,7 +1,7 @@
 import re
 
 # Update these paths to your actual file locations
-with_confidence_path = "classifiersDeterminations.txt"
+with_confidence_path = "finalStopXLargeClassifiersDeterminations.txt"
 without_confidence_path = "MyDetermination.txt"
 
 def parse_results_with_confidence(text):
