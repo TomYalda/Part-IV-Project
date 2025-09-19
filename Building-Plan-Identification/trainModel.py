@@ -4,7 +4,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 # Image dimensions and batch size
-img_width, img_height = 600, 600
+img_width, img_height = 900, 900
 batch_size = 16
 
 
@@ -26,14 +26,14 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 
 # Data generators
 train_generator = train_datagen.flow_from_directory(
-    r"C:\Users\Administrator\Documents\data\text_classification\trainingData",
+    'data/trainingData',
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='binary'
 )
 
 validation_generator = test_datagen.flow_from_directory(
-    r"C:\Users\Administrator\Documents\data\text_classification\testingData\validationData",
+    'data/testingData/validationData',
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='binary'
@@ -68,7 +68,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0005),
 # Callbacks: EarlyStopping and saving best model
 callbacks = [
     EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True),
-    ModelCheckpoint('earlyStopClassifier_large.h5', save_best_only=True)
+    ModelCheckpoint('earlyStopClassifier_xlarge1409.h5', save_best_only=True)
 ]
 
 # Train the model
@@ -82,4 +82,4 @@ model.fit(
 )
 
 # Final save
-model.save('123classifier_large.h5')
+model.save('123classifier_xlarge1409.h5')
