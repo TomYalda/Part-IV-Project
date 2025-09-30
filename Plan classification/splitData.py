@@ -8,8 +8,8 @@ dataset_dir = Path(r"C:\Users\Administrator\Documents\data\plan_classification\t
 output_dir = Path(r"C:\Users\Administrator\Documents\data\plan_classification\split-data")
 
 # split ratios
-train_split = 0.7
-val_split = 0.2  # remaining goes to test
+train_split = 0.8
+val_split = 0.1  # remaining goes to test
 
 # class folders (each subfolder = a class)
 classes = [d for d in os.listdir(dataset_dir) if (dataset_dir / d).is_dir()]

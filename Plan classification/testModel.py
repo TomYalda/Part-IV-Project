@@ -1,15 +1,23 @@
+
+import time
 from ultralytics import YOLO
 import numpy as np
 import os
 
-# Load the best weights from the previous run
-model = YOLO("runs/classify/train21/weights/best.pt")
 
-# Predict on new data
+# Load the best weights from the previous run
+model = YOLO("plan_classifier_yolo.pt")
+
+
+# Predict on new data (timed)
+start_time = time.time()
 predictions = model.predict(
     source=r"C:/Users/Administrator/Documents/data/plan_classification/split-data/test",
     stream=True,
 )
+end_time = time.time()
+elapsed = end_time - start_time
+print(f"Classification took {elapsed:.2f} seconds (prediction only).")
 
 # Write results to a file
 with open("prediction_results.txt", "w") as f:
@@ -28,5 +36,5 @@ with open("prediction_results.txt", "w") as f:
 
         print(f"Image: {image_name}   --------   Predicted class: {predicted_name} with probability {confidence:.2f}")
         f.write(f"Image: {image_name}   --------   Predicted class: {predicted_name} with probability {confidence:.2f}\n")
-
 print("Prediction completed and results saved to 'prediction_results.txt'.")
+print(f"Classification took {elapsed:.2f} seconds (prediction only).")
