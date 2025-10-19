@@ -31,11 +31,11 @@ python classification_pipeline.py input_documents.zip output_results/
 # Extract and preprocess documents
 python extract_and_process.py
 
-# Classify single image for building plan identification
-python Building-Plan-Identification/classifyFile.py
+# Classify folder of images for building plan identification
+python Building-Plan-Identification/classifyFolderFiles.py
 
 # Test YOLO plan classifier
-python "Plan classification/testModel.py"
+python Plan classification/testModel.py
 ```
 
 ## Repository Structure
@@ -61,9 +61,8 @@ python "Plan classification/testModel.py"
 ### Building-Plan-Identification/
 **First-stage classifier for identifying building plans vs other documents**
 
-#### Core Model Files
+#### Core Classification Model
 - `best_classifier.h5` - **Primary trained model** (TensorFlow/Keras CNN optimized for document classification)
-- `123classifier_large.h5` - Alternative model variant
 
 #### Training and Testing Scripts
 - `trainModel.py` - **Model training script** with data augmentation, early stopping, and batch normalization
@@ -80,10 +79,9 @@ python "Plan classification/testModel.py"
 ### Plan classification/
 **Second-stage YOLO classifier for categorizing building plan types**
 
-#### Core Model Files
+#### Core Models
 - `plan_classifier_yolo.pt` - **Primary YOLO classification model** trained for plan type recognition
 - `yolov8l-cls.pt` - Base YOLOv8 large classification model
-- `yolov8n-cls.pt` - YOLOv8 nano model for faster inference
 
 #### Training and Testing Scripts
 - `trainModel.py` - **YOLO training script** using transfer learning from pre-trained weights
@@ -101,9 +99,9 @@ python "Plan classification/testModel.py"
   - `run2_second_classifier/` - Improved model with enhanced data augmentation  
   - `run3_third_classifier/` - Further optimized with adjusted hyperparameters
   - `run4_fourth_classifier/` - Advanced training with extended epochs
-  - `run5_fifth_classifier_final/` - **🏆 FINAL OPTIMIZED MODEL** with 70/20/10 data split
-    - `classification_metrics_final.csv` - **📊 FINAL MODEL PERFORMANCE METRICS**
-    - `prediction_results.txt` - **📋 FINAL PREDICTION OUTPUTS** with confidence scores
+  - `run5_fifth_classifier_final/` - **FINAL OPTIMIZED MODEL** with 80/20/10 data split
+    - `classification_metrics_final.csv` - **FINAL MODEL PERFORMANCE METRICS**
+    - `prediction_results.txt` - **FINAL PREDICTION OUTPUTS** with confidence scores
 
 #### Training Runs
 - `runs/classify/` - **Cleaned YOLOv8 training outputs** (5 runs corresponding to iteration_results):
