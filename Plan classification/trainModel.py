@@ -8,7 +8,7 @@ model = YOLO("yolov8l-cls.pt")
 
 # Train the model
 print("Starting training...")
-results = model.train(data=r"C:/Users/Administrator/Documents/data/plan_classification/split-data", epochs=100, imgsz=600, patience=10, val=True)
+results = model.train(data="data/plan_classification/split-data", epochs=100, imgsz=600, patience=10, val=True)
 print("Training completed.")
 
 # Save the model

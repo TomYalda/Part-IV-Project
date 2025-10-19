@@ -11,14 +11,14 @@ model = load_model('earlyStopClassifier.h5')
 class_names = ['Documents', 'StructuralPlans']
 
 # Define image file path here (change this to your image)
-img_path = 'data/testingData/manualValidationData/1285-Combined_229.jpg'
+img_path = 'data/test_images/sample_image.jpg'
 
 # Validate file existence
 if not os.path.exists(img_path):
     raise FileNotFoundError(f"Image not found at {img_path}")
 
 # Load and preprocess the image
-img = image.load_img(img_path, target_size=(150, 150))
+img = image.load_img(img_path, target_size=(900, 900))
 img_array = image.img_to_array(img)
 img_array = np.expand_dims(img_array, axis=0)
 img_array /= 255.0  # Normalize same as training

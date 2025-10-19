@@ -12,7 +12,7 @@ model = load_model('best_classifier.h5')
 class_names = ['Documents', 'StructuralPlans']
 
 # Directory containing test images
-test_dir = 'data/testingData/manualValidationData'
+test_dir = 'data/test_images'
 
 # Prepare output file
 output_file = 'earlyStopXLargeClassifiersDeterminations.txt'

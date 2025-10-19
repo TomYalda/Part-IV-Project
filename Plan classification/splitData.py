@@ -4,8 +4,8 @@ import shutil
 from pathlib import Path
 
 # paths
-dataset_dir = Path(r"C:\Users\Administrator\Documents\data\plan_classification\train")
-output_dir = Path(r"C:\Users\Administrator\Documents\data\plan_classification\split-data")
+dataset_dir = Path("data/plan_classification/train")
+output_dir = Path("data/plan_classification/split-data")
 
 # split ratios
 train_split = 0.8
@@ -47,7 +47,7 @@ for cls in classes:
                 shutil.copy(f, output_dir / split / cls)
 
 # Generate correct_classifications.txt for test set
-correct_classifications_path = Path(r"c:\Users\Administrator\Documents\Classification Models\Part-IV-Project\Plan classification\correct_classifications.txt")
+correct_classifications_path = Path("correct_classifications.txt")
 with open(correct_classifications_path, "w") as out_file:
     test_dir = output_dir / "test"
     for cls in classes:

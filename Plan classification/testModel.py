@@ -12,7 +12,7 @@ model = YOLO("plan_classifier_yolo.pt")
 # Predict on new data (timed)
 start_time = time.time()
 predictions = model.predict(
-    source=r"C:/Users/Administrator/Documents/data/plan_classification/split-data/test",
+    source="data/plan_classification/split-data/test",
     stream=True,
 )
 end_time = time.time()
