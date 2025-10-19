@@ -91,26 +91,25 @@ python "Plan classification/testModel.py"
 - `splitData.py` - **Dataset preparation utility** for creating train/validation/test splits
 
 #### Results and Analysis
-- `classification_metrics_final.csv` - **Final model performance metrics**
-- `prediction_results.txt` - Detailed prediction outputs with confidence scores
 - `correct_classifications.txt` - Validation results for model accuracy assessment
 - `resultsCalculation.py` - Performance analysis and metrics calculation
 - `text_sorter.py` - Results organization utility
 
 #### Training Iterations
-- `iteration_results/` - Contains results from multiple training iterations:
-  - `initial classifier (train4)/` - First training attempt with baseline performance
-  - `second classifier (train5)/` - Improved model with enhanced data augmentation
-  - `third classifier (train8)/` - Further optimized with adjusted hyperparameters
-  - `fourth classifier (train20)/` - Advanced training with extended epochs
-  - `fifth classifier (train21)/` - Final optimized model with a 70/20/10 data split
+- `iteration_results/` - **Consolidated results from 5 key training iterations**:
+  - `run1_initial_classifier/` - First training attempt with baseline performance
+  - `run2_second_classifier/` - Improved model with enhanced data augmentation  
+  - `run3_third_classifier/` - Further optimized with adjusted hyperparameters
+  - `run4_fourth_classifier/` - Advanced training with extended epochs
+  - `run5_fifth_classifier_final/` - **🏆 FINAL OPTIMIZED MODEL** with 70/20/10 data split
+    - `classification_metrics_final.csv` - **📊 FINAL MODEL PERFORMANCE METRICS**
+    - `prediction_results.txt` - **📋 FINAL PREDICTION OUTPUTS** with confidence scores
 
 #### Training Runs
-- `runs/classify/` - **YOLOv8 training outputs** including:
-  - Model weights at different training stages
-  - Training metrics and loss curves
-  - Validation results and performance charts
-  - Configuration files (`args.yaml`) for reproducibility
+- `runs/classify/` - **Cleaned YOLOv8 training outputs** (5 runs corresponding to iteration_results):
+  - `run1/` through `run5/` - Sequential training runs
+  - Each contains: model weights, training metrics, validation results, configuration files
+  - `run5/` contains the **final model weights** used in production
 
 ## Model Details
 
@@ -178,7 +177,7 @@ The models have been extensively evaluated with metrics including:
 - Precision and recall for each class
 - F1-scores for balanced performance assessment
 - Processing time benchmarks
-- Cross-validation results across multiple iterations
+- Cross-validation results across 5 training iterations
 
 ## Requirements
 
