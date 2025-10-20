@@ -18,22 +18,19 @@ train_datagen = ImageDataGenerator(
     preprocessing_function=lambda x: x + tf.random.normal(shape=tf.shape(x), mean=0.0, stddev=0.02)
 )
 
-
-
-
 # Validation / Test data just needs rescaling
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 # Data generators
 train_generator = train_datagen.flow_from_directory(
-    'data/trainingData',
+    r'C:\Users\Administrator\Downloads\text_classification\text_classification\trainingData',
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='binary'
 )
 
 validation_generator = test_datagen.flow_from_directory(
-    'data/testingData/validationData',
+    r'C:\Users\Administrator\Downloads\text_classification\text_classification\testingData\validationData',
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='binary'
@@ -48,7 +45,6 @@ model = models.Sequential([
     layers.Conv2D(64, (3, 3), activation='relu'),
     layers.BatchNormalization(),
     layers.MaxPooling2D(2, 2),
-
     layers.Conv2D(128, (3, 3), activation='relu'),
     layers.BatchNormalization(),
     layers.MaxPooling2D(2, 2),
@@ -68,7 +64,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0005),
 # Callbacks: EarlyStopping and saving best model
 callbacks = [
     EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True),
-    ModelCheckpoint('earlyStopClassifier_xlarge1409.h5', save_best_only=True)
+    ModelCheckpoint('earlyStopClassifier.h5', save_best_only=True)
 ]
 
 # Train the model
@@ -82,4 +78,4 @@ model.fit(
 )
 
 # Final save
-model.save('123classifier_xlarge1409.h5')
+model.save('finalStopClassifier.h5')

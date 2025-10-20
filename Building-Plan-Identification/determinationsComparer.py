@@ -87,12 +87,9 @@ def main():
     """
     Main function to run the file comparison.
     """
-    # --- Configuration ---
-    # SET YOUR FILE PATHS HERE
-    # file1_path should be the file with full text classifications (e.g., 'Documents')
-    file1_path = 'finalStopXLargeClassifiersDeterminations19.txt'
-    # file2_path should be the file with single character classifications (e.g., 'D')
-    file2_path = 'MyDeterminations2.txt'
+ 
+    file1_path = 'classifiersDeterminations.txt'
+    file2_path = 'MyDeterminations.txt'
     # -------------------
 
     print("--- Starting File Classification Comparison ---")

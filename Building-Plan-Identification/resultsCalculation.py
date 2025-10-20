@@ -3,7 +3,7 @@ import csv
 from sklearn.metrics import accuracy_score, classification_report
 
 with_confidence_path = "classifiersDeterminations.txt"
-without_confidence_path = "MyDetermination.txt"
+without_confidence_path = "MyDeterminations.txt"
 output_csv = "classification_metrics.csv"
 
 def extract_labels_with_confidence(text):

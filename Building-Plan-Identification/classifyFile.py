@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 # Load the trained model
-model = load_model('earlyStopClassifier.h5')
+model = load_model('classifier.h5')
 
 # Class names should match the order from the training generator
 class_names = ['Documents', 'StructuralPlans']

@@ -6,7 +6,7 @@ import os
 import time
 
 # Load the trained model
-model = load_model('best_classifier.h5')
+model = load_model('classifier.h5')
 
 # Class names should match the order from the training generator
 class_names = ['Documents', 'StructuralPlans']
@@ -15,7 +15,7 @@ class_names = ['Documents', 'StructuralPlans']
 test_dir = 'data/test_images'
 
 # Prepare output file
-output_file = 'earlyStopXLargeClassifiersDeterminations.txt'
+output_file = 'classifiersDeterminations.txt'
 files = [f for f in os.listdir(test_dir) if os.path.isfile(os.path.join(test_dir, f))]
 files_sorted = sorted(files, key=lambda x: os.path.getsize(os.path.join(test_dir, x)))
 
