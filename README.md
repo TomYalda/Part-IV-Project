@@ -26,6 +26,17 @@ The classification pipeline operates in two sequential stages:
 python classification_pipeline.py input_documents.zip output_results/
 ```
 
+### Using the Demo Web Interface
+```bash
+# Install demo dependencies
+pip install -r demo_requirements.txt
+
+# Start the demo server
+python demo_app.py
+
+# Open browser to: http://localhost:5000
+```
+
 ### Using Individual Components
 ```bash
 # Extract and preprocess documents
@@ -49,6 +60,25 @@ python Plan classification/testModel.py
 - Classifies identified plans using the YOLO model
 - Organizes results into structured output directories
 - Generates comprehensive classification reports
+
+#### `demo_app.py`
+**Interactive web demonstration interface** for showcasing the classification pipeline:
+- Flask-based web application with real-time progress visualization
+- Drag-and-drop file upload interface
+- Step-by-step pipeline visualization showing extraction, classification, and results
+- Live progress updates and detailed result tables
+- Perfect for presentations and demonstrations
+
+#### `templates/demo.html`
+**Frontend interface** for the demo application:
+- Modern, responsive web interface
+- Real-time progress bars and status updates
+- Interactive file upload with drag-and-drop support
+- Detailed results visualization with confidence scores
+- Professional styling suitable for presentations
+
+#### `demo_requirements.txt`
+**Demo-specific dependencies** including Flask, additional web frameworks
 
 #### `extract_and_process.py`
 **Data preprocessing utility** that handles document extraction and conversion:

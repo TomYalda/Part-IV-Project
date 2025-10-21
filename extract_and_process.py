@@ -8,8 +8,8 @@ from pdf2image import convert_from_path, pdfinfo_from_path
 from PIL import Image
 
 # === INPUTS ===
-ZIP_DIR = "AllFiles/zip_files"
-OUTPUT_DIR = "AllFiles/images"
+ZIP_DIR = r"C:\Users\tomya\OneDrive - The University of Auckland\Documents\2025 Work\University\Part IV Project\AllFiles\zip_files"
+OUTPUT_DIR = r"C:\Users\tomya\OneDrive - The University of Auckland\Documents\2025 Work\University\Part IV Project\AllFiles\images"
 MAX_DEPTH = 10
 
 # Ensure output and temp folder exists
@@ -132,10 +132,11 @@ def extract_and_process(zip_path, output_folder, depth=0):
 
 
 # === Run it ===
-for item in os.listdir(ZIP_DIR):
-    item_path = os.path.join(ZIP_DIR, item)
-    if os.path.isfile(item_path) and item.lower().endswith(".zip"):
-        print(f"[MASTER] Starting to process ZIP: {item_path}")
-        extract_and_process(item_path, OUTPUT_DIR)
-    else:
-        print(f"[MASTER] Skipping non-zip file: {item_path}")
+if __name__ == "__main__":
+    for item in os.listdir(ZIP_DIR):
+        item_path = os.path.join(ZIP_DIR, item)
+        if os.path.isfile(item_path) and item.lower().endswith(".zip"):
+            print(f"[MASTER] Starting to process ZIP: {item_path}")
+            extract_and_process(item_path, OUTPUT_DIR)
+        else:
+            print(f"[MASTER] Skipping non-zip file: {item_path}")

@@ -27,8 +27,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import extract_and_process
 
 class ClassificationPipeline:
-    def __init__(self, building_classifier_path="Building-Plan-Identification/best_classifier.h5",
-                 plan_classifier_path="Plan classification/plan_classifier_yolo.pt"):
+    def __init__(self, building_classifier_path=r"C:\Users\tomya\OneDrive - The University of Auckland\Documents\2025 Work\University\Part IV Project\Models\Part-IV-Project\Building-Plan-Identification\best_classifier.h5",
+                 plan_classifier_path=r"C:\Users\tomya\OneDrive - The University of Auckland\Documents\2025 Work\University\Part IV Project\Models\Part-IV-Project\Plan classification\plan_classifier_yolo.pt"):
         """
         Initialize the classification pipeline with model paths
         
@@ -41,16 +41,32 @@ class ClassificationPipeline:
         self.building_classifier = None
         self.plan_classifier = None
         self.building_class_names = ['Documents', 'StructuralPlans']
-        # Use correct input size that matches training (900x900)
-        self.building_model_input_size = (900, 900)
+        # Use correct input size that matches the actual model training (600x600)
+        # The model expects input shape (600, 600, 3) which flattens to 682112 features
+        self.building_model_input_size = (600, 600)
         
         # Ensure output temp folder exists
         os.makedirs("tmp", exist_ok=True)
         
     def load_models(self):
-        """Load both classification models"""
+        """Load both classification models with performance optimizations"""
         print("Loading building plan identification model...")
+        
+        # Optimize TensorFlow for better performance
+        try:
+            # Enable mixed precision for faster inference if GPU is available
+            if tf.config.list_physical_devices('GPU'):
+                print("GPU detected - enabling optimizations...")
+                policy = tf.keras.mixed_precision.Policy('mixed_float16')
+                tf.keras.mixed_precision.set_global_policy(policy)
+        except Exception as e:
+            print(f"GPU optimization not available: {e}")
+        
+        # Load the CNN model
         self.building_classifier = load_model(self.building_classifier_path)
+        
+        # Compile model with optimizations for inference
+        self.building_classifier.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
         
         print("Loading plan type classification model...")
         self.plan_classifier = YOLO(self.plan_classifier_path)
@@ -86,55 +102,84 @@ class ClassificationPipeline:
             # Restore original OUTPUT_DIR
             extract_and_process.OUTPUT_DIR = original_output_dir
     
-    def classify_building_plans(self, image_paths):
+    def classify_building_plans(self, image_paths, progress_callback=None):
         """
-        Classify images to identify building plans vs other documents
+        Classify images to identify building plans vs other documents using optimized batch processing
         
         Returns:
             building_plans: List of image paths classified as building plans
             classifications: Dict with all classifications and confidence scores
         """
-        print("Classifying images for building plan identification...")
+        print(f"Classifying {len(image_paths)} images for building plan identification...")
         
         building_plans = []
         classifications = {}
         
-        for img_path in image_paths:
-            try:
-                # Load and preprocess image
-                img = image.load_img(img_path, target_size=self.building_model_input_size)
-                img_array = image.img_to_array(img)
-                img_array = np.expand_dims(img_array, axis=0)
-                img_array /= 255.0
+        # Sort files by size for consistent processing order (matches standalone script optimization)
+        try:
+            sorted_paths = sorted(image_paths, key=lambda x: os.path.getsize(x) if os.path.exists(x) else 0)
+        except Exception:
+            sorted_paths = image_paths
+        
+        # Process in batches for better memory management and performance
+        batch_size = 32  # Optimize batch size for performance
+        total_batches = len(sorted_paths) // batch_size + (1 if len(sorted_paths) % batch_size != 0 else 0)
+        
+        for batch_idx in range(total_batches):
+            start_idx = batch_idx * batch_size
+            end_idx = min((batch_idx + 1) * batch_size, len(sorted_paths))
+            batch_paths = sorted_paths[start_idx:end_idx]
+            
+            # Prepare batch data
+            batch_images = []
+            valid_paths = []
+            
+            for img_path in batch_paths:
+                try:
+                    # Load and preprocess image (matches standalone script exactly)
+                    img = image.load_img(img_path, target_size=self.building_model_input_size)
+                    img_array = image.img_to_array(img)
+                    img_array /= 255.0  # Normalize same as training
+                    batch_images.append(img_array)
+                    valid_paths.append(img_path)
+                except Exception as e:
+                    print(f"Error loading {img_path}: {e}")
+                    classifications[img_path] = {
+                        'class': 'Error',
+                        'confidence': 0.0
+                    }
+            
+            if batch_images:
+                # Batch prediction (much faster than individual predictions)
+                batch_array = np.array(batch_images)
+                predictions = self.building_classifier.predict(batch_array, verbose=0)
                 
-                # Predict
-                prediction = self.building_classifier.predict(img_array, verbose=0)
-                pred_prob = prediction[0][0]
-                predicted_class = self.building_class_names[int(pred_prob > 0.5)]
-                confidence = pred_prob if pred_prob > 0.5 else 1 - pred_prob
-                
-                classifications[img_path] = {
-                    'class': predicted_class,
-                    'confidence': confidence
-                }
-                
-                # If classified as structural plan, add to building plans list
-                if predicted_class == 'StructuralPlans':
-                    building_plans.append(img_path)
+                # Process batch results
+                for i, (img_path, prediction) in enumerate(zip(valid_paths, predictions)):
+                    pred_prob = float(prediction[0])  # Convert to Python float immediately
+                    predicted_class = self.building_class_names[int(pred_prob > 0.5)]
+                    confidence = pred_prob if pred_prob > 0.5 else 1 - pred_prob
                     
-            except Exception as e:
-                print(f"Error classifying {img_path}: {e}")
-                classifications[img_path] = {
-                    'class': 'Error',
-                    'confidence': 0.0
-                }
+                    classifications[img_path] = {
+                        'class': predicted_class,
+                        'confidence': confidence  # Already converted to Python float
+                    }
+                    
+                    # If classified as structural plan, add to building plans list
+                    if predicted_class == 'StructuralPlans':
+                        building_plans.append(img_path)
+            
+            # Update progress
+            if progress_callback:
+                progress = 30 + ((batch_idx + 1) / total_batches) * 40  # CNN takes 30-70% of total progress
+                progress_callback(f"CNN Analysis: {end_idx}/{len(sorted_paths)} images processed", progress)
         
         print(f"Identified {len(building_plans)} building plans out of {len(image_paths)} images")
         return building_plans, classifications
     
-    def classify_plan_types(self, building_plan_paths):
+    def classify_plan_types(self, building_plan_paths, progress_callback=None):
         """
-        Classify building plans into specific plan types using YOLO classifier
+        Classify building plans into specific plan types using optimized batch YOLO processing
         
         Returns:
             plan_classifications: Dict with plan type classifications and confidence scores
@@ -147,34 +192,78 @@ class ClassificationPipeline:
         
         plan_classifications = {}
         
-        for plan_path in building_plan_paths:
-            try:
-                # Predict using YOLO model
-                results = self.plan_classifier.predict(source=plan_path, verbose=False)
+        # Use batch prediction for much better performance (matches standalone testModel.py)
+        try:
+            # YOLO can handle batch processing efficiently via stream=True
+            results = self.plan_classifier.predict(
+                source=building_plan_paths,  # Pass all paths at once for batch processing
+                stream=True,  # Use streaming for memory efficiency
+                verbose=False
+            )
+            
+            processed_count = 0
+            total_plans = len(building_plan_paths)
+            
+            for result in results:
+                processed_count += 1
+                plan_path = result.path
                 
-                for result in results:
-                    if result.probs is not None:
-                        probs = result.probs.data
-                        predicted_index = np.array(probs).argmax()
-                        predicted_name = self.plan_classifier.names[predicted_index]
-                        confidence = float(probs[predicted_index])
+                if result.probs is not None:
+                    probs = result.probs.data
+                    predicted_index = np.array(probs).argmax()
+                    predicted_name = self.plan_classifier.names[predicted_index]
+                    confidence = float(probs[predicted_index])
+                    
+                    plan_classifications[plan_path] = {
+                        'plan_type': predicted_name,
+                        'confidence': confidence  # Already converted via float() above
+                    }
+                else:
+                    plan_classifications[plan_path] = {
+                        'plan_type': 'Unknown',
+                        'confidence': 0.0
+                    }
+                
+                # Progress callback
+                if progress_callback:
+                    progress = 70 + (processed_count / total_plans) * 25  # YOLO takes 70-95% of total progress
+                    progress_callback(f"YOLO Classification: {processed_count}/{total_plans} plans classified", progress)
+        
+        except Exception as e:
+            print(f"Error in batch YOLO classification: {e}")
+            # Fallback to individual processing if batch fails
+            for i, plan_path in enumerate(building_plan_paths):
+                try:
+                    results = self.plan_classifier.predict(source=plan_path, verbose=False)
+                    
+                    for result in results:
+                        if result.probs is not None:
+                            probs = result.probs.data
+                            predicted_index = np.array(probs).argmax()
+                            predicted_name = self.plan_classifier.names[predicted_index]
+                            confidence = float(probs[predicted_index])
+                            
+                            plan_classifications[plan_path] = {
+                                'plan_type': predicted_name,
+                                'confidence': confidence
+                            }
+                        else:
+                            plan_classifications[plan_path] = {
+                                'plan_type': 'Unknown',
+                                'confidence': 0.0
+                            }
                         
-                        plan_classifications[plan_path] = {
-                            'plan_type': predicted_name,
-                            'confidence': confidence
-                        }
-                    else:
-                        plan_classifications[plan_path] = {
-                            'plan_type': 'Unknown',
-                            'confidence': 0.0
-                        }
-                        
-            except Exception as e:
-                print(f"Error classifying plan type for {plan_path}: {e}")
-                plan_classifications[plan_path] = {
-                    'plan_type': 'Error',
-                    'confidence': 0.0
-                }
+                except Exception as e2:
+                    print(f"Error classifying plan type for {plan_path}: {e2}")
+                    plan_classifications[plan_path] = {
+                        'plan_type': 'Error',
+                        'confidence': 0.0
+                    }
+                
+                # Progress callback for fallback
+                if progress_callback:
+                    progress = 70 + ((i + 1) / len(building_plan_paths)) * 25
+                    progress_callback(f"YOLO Classification: {i+1}/{len(building_plan_paths)} plans classified", progress)
         
         return plan_classifications
     
