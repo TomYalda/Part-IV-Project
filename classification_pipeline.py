@@ -41,8 +41,7 @@ class ClassificationPipeline:
         self.building_classifier = None
         self.plan_classifier = None
         self.building_class_names = ['Documents', 'StructuralPlans']
-        # Use correct input size that matches the actual model training (600x600)
-        # The model expects input shape (600, 600, 3) which flattens to 682112 features
+        # Building plan identification model expects 600x600 input (CNN .h5 file)
         self.building_model_input_size = (600, 600)
         
         # Ensure output temp folder exists
@@ -104,7 +103,7 @@ class ClassificationPipeline:
     
     def classify_building_plans(self, image_paths, progress_callback=None):
         """
-        Classify images to identify building plans vs other documents using optimized batch processing
+        Classify images to identify building plans vs other documents (matches classifyFolderFiles.py exactly)
         
         Returns:
             building_plans: List of image paths classified as building plans
@@ -115,72 +114,66 @@ class ClassificationPipeline:
         building_plans = []
         classifications = {}
         
-        # Sort files by size for consistent processing order (matches standalone script optimization)
+        # Sort files by size for consistent processing order (matches classifyFolderFiles.py)
         try:
-            sorted_paths = sorted(image_paths, key=lambda x: os.path.getsize(x) if os.path.exists(x) else 0)
+            files_sorted = sorted(image_paths, key=lambda x: os.path.getsize(x) if os.path.exists(x) else 0)
         except Exception:
-            sorted_paths = image_paths
+            files_sorted = image_paths
         
-        # Process in batches for better memory management and performance
-        batch_size = 32  # Optimize batch size for performance
-        total_batches = len(sorted_paths) // batch_size + (1 if len(sorted_paths) % batch_size != 0 else 0)
+        # Use the exact same approach as classifyFolderFiles.py for optimal performance
+        predictions = []
+        total_images = len(files_sorted)
         
-        for batch_idx in range(total_batches):
-            start_idx = batch_idx * batch_size
-            end_idx = min((batch_idx + 1) * batch_size, len(sorted_paths))
-            batch_paths = sorted_paths[start_idx:end_idx]
-            
-            # Prepare batch data
-            batch_images = []
-            valid_paths = []
-            
-            for img_path in batch_paths:
-                try:
-                    # Load and preprocess image (matches standalone script exactly)
-                    img = image.load_img(img_path, target_size=self.building_model_input_size)
-                    img_array = image.img_to_array(img)
-                    img_array /= 255.0  # Normalize same as training
-                    batch_images.append(img_array)
-                    valid_paths.append(img_path)
-                except Exception as e:
-                    print(f"Error loading {img_path}: {e}")
-                    classifications[img_path] = {
-                        'class': 'Error',
-                        'confidence': 0.0
-                    }
-            
-            if batch_images:
-                # Batch prediction (much faster than individual predictions)
-                batch_array = np.array(batch_images)
-                predictions = self.building_classifier.predict(batch_array, verbose=0)
+        for i, img_path in enumerate(files_sorted):
+            try:
+                # Load and preprocess the image (building plan identification uses 600x600)
+                img = image.load_img(img_path, target_size=(600, 600))
+                img_array = image.img_to_array(img)
+                img_array = np.expand_dims(img_array, axis=0)
+                img_array /= 255.0  # Normalize same as training
+
+                # Predict the class (exact same logic as classifyFolderFiles.py)
+                prediction = self.building_classifier.predict(img_array, verbose=0)
+                pred_prob = prediction[0][0]
+                predicted_class = self.building_class_names[int(pred_prob > 0.5)]
                 
-                # Process batch results
-                for i, (img_path, prediction) in enumerate(zip(valid_paths, predictions)):
-                    pred_prob = float(prediction[0])  # Convert to Python float immediately
-                    predicted_class = self.building_class_names[int(pred_prob > 0.5)]
-                    confidence = pred_prob if pred_prob > 0.5 else 1 - pred_prob
-                    
-                    classifications[img_path] = {
-                        'class': predicted_class,
-                        'confidence': confidence  # Already converted to Python float
-                    }
-                    
-                    # If classified as structural plan, add to building plans list
-                    if predicted_class == 'StructuralPlans':
-                        building_plans.append(img_path)
+                # Store prediction
+                predictions.append((img_path, predicted_class, pred_prob))
+                
+                # Convert to expected format
+                confidence = float(pred_prob) if pred_prob > 0.5 else float(1 - pred_prob)
+                classifications[img_path] = {
+                    'class': predicted_class,
+                    'confidence': confidence
+                }
+                
+                # If classified as structural plan, add to building plans list
+                if predicted_class == 'StructuralPlans':
+                    building_plans.append(img_path)
+                
+            except Exception as e:
+                predictions.append((img_path, None, str(e)))
+                classifications[img_path] = {
+                    'class': 'Error',
+                    'confidence': 0.0
+                }
             
-            # Update progress
+            # Progress callback
             if progress_callback:
-                progress = 30 + ((batch_idx + 1) / total_batches) * 40  # CNN takes 30-70% of total progress
-                progress_callback(f"CNN Analysis: {end_idx}/{len(sorted_paths)} images processed", progress)
+                progress = 30 + ((i + 1) / total_images) * 40  # CNN takes 30-70% of total progress
+                progress_callback(f"CNN Analysis: {i+1}/{total_images} images processed", progress)
         
         print(f"Identified {len(building_plans)} building plans out of {len(image_paths)} images")
         return building_plans, classifications
     
     def classify_plan_types(self, building_plan_paths, progress_callback=None):
         """
-        Classify building plans into specific plan types using optimized batch YOLO processing
+        Classify building plans into specific plan types using YOLO (matches testModel.py exactly)
         
+        Args:
+            building_plan_paths: List of image paths that were classified as building plans
+            progress_callback: Optional callback function for progress updates
+            
         Returns:
             plan_classifications: Dict with plan type classifications and confidence scores
         """
@@ -192,78 +185,53 @@ class ClassificationPipeline:
         
         plan_classifications = {}
         
-        # Use batch prediction for much better performance (matches standalone testModel.py)
-        try:
-            # YOLO can handle batch processing efficiently via stream=True
-            results = self.plan_classifier.predict(
-                source=building_plan_paths,  # Pass all paths at once for batch processing
-                stream=True,  # Use streaming for memory efficiency
-                verbose=False
-            )
-            
-            processed_count = 0
-            total_plans = len(building_plan_paths)
-            
-            for result in results:
-                processed_count += 1
-                plan_path = result.path
+        # Process files one by one to avoid hanging issues with batch processing
+        # This matches the approach that works in testModel.py
+        total_plans = len(building_plan_paths)
+        
+        for i, img_path in enumerate(building_plan_paths):
+            try:
+                # Process single image at a time (this approach works reliably)
+                predictions = self.plan_classifier.predict(
+                    source=img_path,  # Single file path
+                    stream=False,     # No streaming for single files
+                    verbose=False     # Reduce output noise
+                )
                 
-                if result.probs is not None:
-                    probs = result.probs.data
-                    predicted_index = np.array(probs).argmax()
-                    predicted_name = self.plan_classifier.names[predicted_index]
-                    confidence = float(probs[predicted_index])
-                    
-                    plan_classifications[plan_path] = {
-                        'plan_type': predicted_name,
-                        'confidence': confidence  # Already converted via float() above
-                    }
-                else:
-                    plan_classifications[plan_path] = {
+                # Get the first (and only) result
+                result = predictions[0] if predictions else None
+                
+                if result is None or result.probs is None:
+                    print(f"No probabilities for {img_path}")
+                    plan_classifications[img_path] = {
                         'plan_type': 'Unknown',
                         'confidence': 0.0
                     }
+                    continue
+
+                probs = result.probs.data
+
+                # Get prediction (exact same logic as testModel.py)
+                predicted_index = np.array(probs).argmax()
+                predicted_name = self.plan_classifier.names[predicted_index]
+                confidence = float(probs[predicted_index])  # Convert to Python float
+                
+                plan_classifications[img_path] = {
+                    'plan_type': predicted_name,
+                    'confidence': confidence
+                }
                 
                 # Progress callback
                 if progress_callback:
-                    progress = 70 + (processed_count / total_plans) * 25  # YOLO takes 70-95% of total progress
-                    progress_callback(f"YOLO Classification: {processed_count}/{total_plans} plans classified", progress)
-        
-        except Exception as e:
-            print(f"Error in batch YOLO classification: {e}")
-            # Fallback to individual processing if batch fails
-            for i, plan_path in enumerate(building_plan_paths):
-                try:
-                    results = self.plan_classifier.predict(source=plan_path, verbose=False)
+                    progress = 70 + ((i + 1) / total_plans) * 25  # YOLO takes 70-95% of total progress
+                    progress_callback(f"YOLO Classification: {i+1}/{total_plans} plans classified", progress)
                     
-                    for result in results:
-                        if result.probs is not None:
-                            probs = result.probs.data
-                            predicted_index = np.array(probs).argmax()
-                            predicted_name = self.plan_classifier.names[predicted_index]
-                            confidence = float(probs[predicted_index])
-                            
-                            plan_classifications[plan_path] = {
-                                'plan_type': predicted_name,
-                                'confidence': confidence
-                            }
-                        else:
-                            plan_classifications[plan_path] = {
-                                'plan_type': 'Unknown',
-                                'confidence': 0.0
-                            }
-                        
-                except Exception as e2:
-                    print(f"Error classifying plan type for {plan_path}: {e2}")
-                    plan_classifications[plan_path] = {
-                        'plan_type': 'Error',
-                        'confidence': 0.0
-                    }
-                
-                # Progress callback for fallback
-                if progress_callback:
-                    progress = 70 + ((i + 1) / len(building_plan_paths)) * 25
-                    progress_callback(f"YOLO Classification: {i+1}/{len(building_plan_paths)} plans classified", progress)
+            except Exception as e:
+                print(f"Error processing {img_path}: {e}")
+                plan_classifications[img_path] = {
+                    'plan_type': 'Error',
+                    'confidence': 0.0
+                }
         
         return plan_classifications
     

@@ -6,7 +6,7 @@ This folder contains a web-based demonstration interface for the building plan c
 
 1. **Install dependencies** (from the main project directory):
    ```bash
-   pip install -r demo_requirements.txt
+   pip install -r requirements.txt
    ```
 
 2. **Run the demo**:

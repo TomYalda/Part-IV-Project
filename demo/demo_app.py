@@ -12,6 +12,7 @@ Then open: http://localhost:5000
 """
 
 import os
+import sys
 import time
 import json
 import shutil
@@ -24,6 +25,9 @@ from werkzeug.utils import secure_filename
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+
+# Add parent directory to path to import classification_pipeline
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Optimize TensorFlow for better performance
 tf.config.optimizer.set_jit(True)  # Enable XLA compilation

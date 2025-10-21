@@ -383,7 +383,7 @@
                         <div class="progress-fill" id="progress2"></div>
                     </div>
                     <div class="stage-details" id="details2">
-                        CNN model analyzes each image to identify building plans vs other documents
+                        CNN model analyses each image to identify building plans vs other documents
                     </div>
                 </div>
 
@@ -524,7 +524,7 @@
                 updateStage(i, 'waiting', 0);
                 document.getElementById(`details${i}`).textContent = 
                     i === 1 ? 'Extract ZIP files and convert documents to standardized image format' :
-                    i === 2 ? 'CNN model analyzes each image to identify building plans vs other documents' :
+                    i === 2 ? 'CNN model analyses each image to identify building plans vs other documents' :
                     'YOLO model classifies building plans into specific types (architectural, structural, etc.)';
             }
         }
