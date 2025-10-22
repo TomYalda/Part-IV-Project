@@ -6,453 +6,522 @@
     <title>Building Plan Classification Demo</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #E8ECF3;
+        min-height: 100vh;
+        padding: 20px;
+        color: #1B3A6E;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(27, 58, 110, 0.15);
+        overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
+        background-color: #1B3A6E;
+        color: white;
+        padding: 35px;
+        text-align: center;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        font-size: 2.6em;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
         }
 
         .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+        font-size: 1.1em;
+        opacity: 0.95;
         }
 
         .main-content {
-            padding: 40px;
+        padding: 40px;
         }
 
         .upload-section {
-            text-align: center;
-            margin-bottom: 40px;
+        text-align: center;
+        margin-bottom: 40px;
         }
 
         .upload-area {
-            border: 3px dashed #667eea;
-            border-radius: 15px;
-            padding: 60px 40px;
-            background: #f8f9ff;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        border: 3px dashed #1B3A6E;
+        border-radius: 12px;
+        padding: 60px 40px;
+        background-color: #F7F9FC;
+        transition: all 0.3s ease;
+        cursor: pointer;
         }
 
         .upload-area:hover {
-            border-color: #764ba2;
-            background: #f0f2ff;
+        border-color: #F4A300;
+        background-color: #EFF3FA;
         }
 
         .upload-area.dragover {
-            border-color: #4CAF50;
-            background: #e8f5e8;
-        }
-
-        .upload-icon {
-            font-size: 4em;
-            color: #667eea;
-            margin-bottom: 20px;
+        border-color: #4CAF50;
+        background-color: #E9F7EB;
         }
 
         .upload-text {
-            font-size: 1.2em;
-            color: #555;
-            margin-bottom: 20px;
+        font-size: 1.2em;
+        color: #333;
+        margin-bottom: 20px;
         }
 
         .file-input {
-            display: none;
+        display: none;
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1em;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        background-color: #F4A300;
+        color: #1B3A6E;
+        border: none;
+        padding: 12px 30px;
+        font-size: 1.1em;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: bold;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        background-color: #d99600;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.15);
         }
 
         .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
+        background-color: #ccc;
+        color: #777;
+        cursor: not-allowed;
         }
 
         .pipeline-visualization {
-            display: none;
-            margin-top: 40px;
+        display: none;
+        margin-top: 40px;
         }
 
         .stage {
-            background: #f8f9ff;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid #ddd;
-            transition: all 0.3s ease;
+        background-color: #F7F9FC;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 6px solid #ccc;
+        transition: all 0.3s ease;
         }
 
         .stage.active {
-            border-left-color: #667eea;
-            background: #e8f2ff;
+        border-left-color: #F4A300;
+        background-color: #FFF7E1;
         }
 
         .stage.completed {
-            border-left-color: #4CAF50;
-            background: #e8f5e8;
+        border-left-color: #4CAF50;
+        background-color: #E9F7EB;
         }
 
         .stage-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
         }
 
         .stage-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #333;
+        font-size: 1.3em;
+        font-weight: bold;
         }
 
         .stage-status {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: bold;
         }
 
         .status-waiting {
-            background: #f0f0f0;
-            color: #666;
+        background-color: #f0f0f0;
+        color: #666;
         }
 
         .status-processing {
-            background: #fff3cd;
-            color: #856404;
+        background-color: #FFF3CD;
+        color: #856404;
         }
 
         .status-completed {
-            background: #d4edda;
-            color: #155724;
+        background-color: #D4EDDA;
+        color: #155724;
         }
 
         .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 10px;
+        width: 100%;
+        height: 8px;
+        background-color: #E0E0E0;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 10px;
         }
 
         .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.3s ease;
+        height: 100%;
+        background-color: #F4A300;
+        width: 0%;
+        transition: width 0.3s ease;
         }
 
         .stage-details {
-            color: #666;
-            font-size: 1em;
-            line-height: 1.5;
+        color: #555;
+        font-size: 1em;
+        line-height: 1.5;
         }
 
         .results-section {
-            display: none;
-            margin-top: 40px;
+        display: none;
+        margin-top: 40px;
         }
 
         .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
         }
 
         .result-card {
-            background: #f8f9ff;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
+        background-color: #F7F9FC;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        flex: 1 1 22%;
+        min-width: 220px;
         }
 
         .result-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #1B3A6E;
+        margin-bottom: 10px;
         }
 
         .result-label {
-            color: #666;
-            font-size: 1.1em;
+        color: #444;
+        font-size: 1.1em;
         }
 
         .files-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 36px; /* extra space below tables */
         }
 
         .files-table th,
         .files-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
         }
 
         .files-table th {
-            background: #667eea;
-            color: white;
-            font-weight: bold;
+        background-color: #1B3A6E;
+        color: white;
+        font-weight: bold;
         }
 
         .files-table tr:hover {
-            background: #f8f9ff;
-        }
-
-        #disciplineSummary {
-            margin: 30px 0;
-        }
-
-        #disciplineTable {
-            margin-bottom: 20px;
+        background-color: #F7F9FC;
         }
 
         #disciplineTable th {
-            background: #764ba2;
+        background-color: #F4A300;
+        color: #1B3A6E;
         }
-
-        #disciplineTable td:nth-child(2),
-        #disciplineTable td:nth-child(3) {
-            text-align: center;
-            font-weight: bold;
-        }
+    /* Add spacing above/below tables for clearer separation */
+    #disciplineTable { margin-bottom: 28px; }
 
         .confidence-bar {
-            width: 100px;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            display: inline-block;
-            margin-left: 10px;
+        width: 100px;
+        height: 8px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        display: inline-block;
+        margin-left: 10px;
         }
 
         .confidence-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
-            border-radius: 5px;
+        height: 100%;
+        background-color: #1B3A6E;
+        border-radius: 5px;
         }
 
         .classification-tag {
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            font-weight: bold;
-            display: inline-block;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        font-weight: bold;
+        display: inline-block;
         }
 
         .tag-structural {
-            background: #d4edda;
-            color: #155724;
+        background-color: #D4EDDA;
+        color: #155724;
         }
 
         .tag-document {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        background-color: #F8D7DA;
+        color: #721C24;
         }
 
         .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #dc3545;
+        background-color: #F8D7DA;
+        color: #721C24;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border-left: 5px solid #C82333;
         }
 
         .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #28a745;
+        background-color: #D4EDDA;
+        color: #155724;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px 0;
+        border-left: 5px solid #28A745;
         }
+
+        .saved-session {
+        background-color: #F7F9FC;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #E0E0E0;
+        }
+
+        .saved-session h4 {
+        color: #1B3A6E;
+        margin-bottom: 10px;
+        }
+
+        .session-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+        gap: 10px;
+        }
+
+        .session-stat {
+        background-color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        border: 1px solid #E0E0E0;
+        font-size: 0.9em;
+        }
+
+        .session-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        }
+
+        .btn-small {
+        background-color: #1B3A6E;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        font-size: 0.9em;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        }
+
+        .btn-small:hover {
+        background-color: #2A4A7E;
+        transform: translateY(-1px);
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏗️ Building Plan Classification Demo</h1>
-            <p>AI-powered document classification and plan type identification</p>
+        <h1>Building Plan Classification Demo</h1>
+        <p>AI-powered document classification and plan type identification</p>
         </div>
 
         <div class="main-content">
-            <div class="upload-section">
-                <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">📁</div>
-                    <div class="upload-text">
-                        <strong>Drop your files here or click to browse</strong><br>
-                        Supports: ZIP files with mixed documents, or individual images (PDF, PNG, JPG, TIFF)
-                    </div>
-                    <input type="file" id="fileInput" class="file-input" accept=".zip,.pdf,.png,.jpg,.jpeg,.tiff">
-                    <button class="btn" onclick="document.getElementById('fileInput').click()">
-                        Choose File
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+            <div class="upload-text">
+                <strong>Drop your files here or click to browse</strong><br>
+                Supports: ZIP files with mixed documents, or individual images (PDF, PNG, JPG, TIFF)
+            </div>
+            <input type="file" id="fileInput" class="file-input" accept=".zip,.pdf,.png,.jpg,.jpeg,.tiff">
+            <button class="btn" onclick="document.getElementById('fileInput').click()">
+                Choose File
+            </button>
+            </div>
+        </div>
+
+        <div id="messages"></div>
+
+        <div class="pipeline-visualization" id="pipelineViz">
+            <h2>Classification Pipeline Progress</h2>
+
+            <div class="stage" id="stage1">
+            <div class="stage-header">
+                <div class="stage-title">1. File Extraction & Preprocessing</div>
+                <div class="stage-status status-waiting">Waiting</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress1"></div>
+            </div>
+            <div class="stage-details" id="details1">
+                Extract ZIP files and convert documents to standardized image format
+            </div>
+            </div>
+
+            <div class="stage" id="stage2">
+            <div class="stage-header">
+                <div class="stage-title">2. Building Plan Identification</div>
+                <div class="stage-status status-waiting">Waiting</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress2"></div>
+            </div>
+            <div class="stage-details" id="details2">
+                CNN model analyses each image to identify building plans vs other documents
+            </div>
+            </div>
+
+            <div class="stage" id="stage3">
+            <div class="stage-header">
+                <div class="stage-title">3. Building Plan Classification</div>
+                <div class="stage-status status-waiting">Waiting</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress3"></div>
+            </div>
+            <div class="stage-details" id="details3">
+                YOLO model classifies building plans into specific types (architectural, structural, etc.)
+            </div>
+            </div>
+
+            <div class="stage" id="stage4">
+            <div class="stage-header">
+                <div class="stage-title">4. Results Storage</div>
+                <div class="stage-status status-waiting">Waiting</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress4"></div>
+            </div>
+            <div class="stage-details" id="details4">
+                Organize and save classified images with detailed classification report
+            </div>
+            </div>
+        </div>
+
+        <div class="results-section" id="resultsSection">
+            <h2>Classification Results</h2>
+
+            <div class="results-grid">
+            <div class="result-card">
+                <div class="result-number" id="totalImages">0</div>
+                <div class="result-label">Total Images</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number" id="buildingPlans">0</div>
+                <div class="result-label">Building Plans</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number" id="otherDocs">0</div>
+                <div class="result-label">Other Documents</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number" id="processingTime">0s</div>
+                <div class="result-label">Processing Time</div>
+            </div>
+            </div>
+
+            <div id="disciplineSummary" style="display: none;">
+            <h3>Plan Types Summary</h3>
+            <table class="files-table" id="disciplineTable">
+                <thead>
+                <tr>
+                    <th>Plan Type/Discipline</th>
+                    <th>Number of Files</th>
+                    <th>Percentage</th>
+                </tr>
+                </thead>
+                <tbody id="disciplineTableBody"></tbody>
+            </table>
+            </div>
+
+            <!-- Move storage controls above the detailed classification table for easier access -->
+            <div id="storageInfo" style="display: none; margin-bottom: 20px;">
+                <h3>Saved Results</h3>
+                <div class="success-message" id="storageMessage"></div>
+                <div style="margin-top: 15px;">
+                    <button class="btn" onclick="viewSavedResults()" style="margin-right: 10px;">
+                        📁 Browse All Saved Results
+                    </button>
+                    <button class="btn" onclick="downloadReport()" id="downloadReportBtn" style="display: none;">
+                        📄 Download Classification Report
                     </button>
                 </div>
             </div>
 
-            <div id="messages"></div>
+            <h3>Detailed File Classifications</h3>
+            <table class="files-table" id="filesTable">
+            <thead>
+                <tr>
+                <th>Filename</th>
+                <th>Building Classification</th>
+                <th>Confidence</th>
+                <th>Plan Type</th>
+                <th>Type Confidence</th>
+                </tr>
+            </thead>
+            <tbody id="filesTableBody"></tbody>
+            </table>
 
-            <div class="pipeline-visualization" id="pipelineViz">
-                <h2>🚀 Classification Pipeline Progress</h2>
-                
-                <div class="stage" id="stage1">
-                    <div class="stage-header">
-                        <div class="stage-title">1. File Extraction & Preprocessing</div>
-                        <div class="stage-status status-waiting">Waiting</div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress1"></div>
-                    </div>
-                    <div class="stage-details" id="details1">
-                        Extract ZIP files and convert documents to standardized image format
-                    </div>
-                </div>
-
-                <div class="stage" id="stage2">
-                    <div class="stage-header">
-                        <div class="stage-title">2. Building Plan Identification</div>
-                        <div class="stage-status status-waiting">Waiting</div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress2"></div>
-                    </div>
-                    <div class="stage-details" id="details2">
-                        CNN model analyses each image to identify building plans vs other documents
-                    </div>
-                </div>
-
-                <div class="stage" id="stage3">
-                    <div class="stage-header">
-                        <div class="stage-title">3. Building Plan Classification</div>
-                        <div class="stage-status status-waiting">Waiting</div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress3"></div>
-                    </div>
-                    <div class="stage-details" id="details3">
-                        YOLO model classifies building plans into specific types (architectural, structural, etc.)
-                    </div>
+            <div id="storageInfo" style="display: none;">
+                <h3>Saved Results</h3>
+                <div class="success-message" id="storageMessage"></div>
+                <div style="margin-top: 15px;">
+                    <button class="btn" onclick="viewSavedResults()" style="margin-right: 10px;">
+                        📁 Browse All Saved Results
+                    </button>
+                    <button class="btn" onclick="downloadReport()" id="downloadReportBtn" style="display: none;">
+                        📄 Download Classification Report
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <div class="results-section" id="resultsSection">
-                <h2>📊 Classification Results</h2>
-                
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-number" id="totalImages">0</div>
-                        <div class="result-label">Total Images</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number" id="buildingPlans">0</div>
-                        <div class="result-label">Building Plans</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number" id="otherDocs">0</div>
-                        <div class="result-label">Other Documents</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number" id="processingTime">0s</div>
-                        <div class="result-label">Processing Time</div>
-                    </div>
-                </div>
-
-                <div id="disciplineSummary" style="display: none;">
-                    <h3>🏗️ Plan Types Summary</h3>
-                    <table class="files-table" id="disciplineTable">
-                        <thead>
-                            <tr>
-                                <th>Plan Type/Discipline</th>
-                                <th>Number of Files</th>
-                                <th>Percentage</th>
-                            </tr>
-                        </thead>
-                        <tbody id="disciplineTableBody">
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>📋 Detailed File Classifications</h3>
-                <table class="files-table" id="filesTable">
-                    <thead>
-                        <tr>
-                            <th>Filename</th>
-                            <th>Building Classification</th>
-                            <th>Confidence</th>
-                            <th>Plan Type</th>
-                            <th>Type Confidence</th>
-                        </tr>
-                    </thead>
-                    <tbody id="filesTableBody">
-                    </tbody>
-                </table>
-            </div>
+        <div class="results-section" id="savedResultsSection" style="display: none;">
+            <h2>Previously Saved Classification Sessions</h2>
+            <div id="savedResultsList"></div>
+        </div>
         </div>
     </div>
 
@@ -520,14 +589,17 @@
         }
 
         function resetPipeline() {
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 4; i++) {
                 updateStage(i, 'waiting', 0);
                 document.getElementById(`details${i}`).textContent = 
                     i === 1 ? 'Extract ZIP files and convert documents to standardized image format' :
                     i === 2 ? 'CNN model analyses each image to identify building plans vs other documents' :
-                    'YOLO model classifies building plans into specific types (architectural, structural, etc.)';
+                    i === 3 ? 'YOLO model classifies building plans into specific types (architectural, structural, etc.)' :
+                    'Organize and save classified images with detailed classification report';
             }
         }
+
+        let currentSessionName = '';
 
         function displayResults(results) {
             // Show results section
@@ -589,6 +661,21 @@
                 
                 tableBody.appendChild(row);
             });
+
+            // Show storage information if available
+            if (results.output_directory) {
+                currentSessionName = results.output_directory.split('\\').pop() || results.output_directory.split('/').pop();
+                const storageInfo = document.getElementById('storageInfo');
+                const storageMessage = document.getElementById('storageMessage');
+                const downloadBtn = document.getElementById('downloadReportBtn');
+                
+                storageInfo.style.display = 'block';
+                storageMessage.textContent = `Results saved to: ${results.output_directory}`;
+                
+                if (results.saved_files && results.saved_files.classification_report) {
+                    downloadBtn.style.display = 'inline-block';
+                }
+            }
         }
 
         async function handleFileUpload(file) {
@@ -636,10 +723,15 @@
                             } else if (progress.progress <= 70) {
                                 updateStage(1, 'completed', 100, 'Files extracted successfully');
                                 updateStage(2, 'processing', (progress.progress - 30) * 2.5, progress.message);
-                            } else {
+                            } else if (progress.progress <= 95) {
                                 updateStage(1, 'completed', 100, 'Files extracted successfully');
                                 updateStage(2, 'completed', 100, 'Building plans identified');
                                 updateStage(3, 'processing', (progress.progress - 70) * 4, progress.message);
+                            } else {
+                                updateStage(1, 'completed', 100, 'Files extracted successfully');
+                                updateStage(2, 'completed', 100, 'Building plans identified');
+                                updateStage(3, 'completed', 100, 'Plan types classified');
+                                updateStage(4, 'processing', (progress.progress - 95) * 20, progress.message);
                             }
                             showMessage(progress.message, 'info');
                         }
@@ -671,6 +763,7 @@
                 updateStage(1, 'completed', 100, results.stages[0]?.details || 'Files extracted successfully');
                 updateStage(2, 'completed', 100, results.stages[1]?.details || 'Building plans identified');
                 updateStage(3, 'completed', 100, results.stages[2]?.details || 'Plan types classified');
+                updateStage(4, 'completed', 100, results.stages[3]?.details || 'Results saved successfully');
 
                 // Show final results
                 showMessage('Classification completed successfully!', 'success');
@@ -680,6 +773,170 @@
                 showMessage(`Processing error: ${error.message}`, 'error');
             } finally {
                 currentProcessing = false;
+            }
+        }
+
+        async function viewSavedResults() {
+            try {
+                const response = await fetch('/results');
+                const data = await response.json();
+                
+                if (data.error) {
+                    showMessage(`Error loading saved results: ${data.error}`, 'error');
+                    return;
+                }
+                
+                const savedSection = document.getElementById('savedResultsSection');
+                const savedList = document.getElementById('savedResultsList');
+                
+                if (data.results.length === 0) {
+                    savedList.innerHTML = '<div class="success-message">No saved results found.</div>';
+                } else {
+                    savedList.innerHTML = '';
+                    
+                    data.results.forEach(session => {
+                        const sessionDiv = document.createElement('div');
+                        sessionDiv.className = 'saved-session';
+                        
+                        const timestamp = session.timestamp.replace('_', ' ').substring(0, 15);
+                        const formattedTime = timestamp.replace(/(\d{4})(\d{2})(\d{2}) (\d{2})(\d{2})/, '$1-$2-$3 $4:$5');
+                        
+                        sessionDiv.innerHTML = `
+                            <h4>📁 Session: ${formattedTime}</h4>
+                            <div class="session-info">
+                                <div class="session-stat">📊 Total Files: ${session.total_files}</div>
+                                <div class="session-stat">🏗️ Building Plans: ${session.building_plans}</div>
+                                <div class="session-stat">📄 Documents: ${session.documents}</div>
+                                <div class="session-stat">🏷️ Plan Types: ${session.plan_types.length}</div>
+                            </div>
+                            <div class="session-actions">
+                                <button class="btn-small" onclick="downloadSessionReport('${session.name}')">
+                                    📄 Download Report
+                                </button>
+                                <button class="btn-small" onclick="viewSessionDetails('${session.name}')">
+                                    👁️ View Details
+                                </button>
+                            </div>
+                        `;
+                        
+                        savedList.appendChild(sessionDiv);
+                    });
+                }
+                
+                savedSection.style.display = 'block';
+                savedSection.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                showMessage(`Error loading saved results: ${error.message}`, 'error');
+            }
+        }
+
+        async function downloadReport() {
+            if (!currentSessionName) {
+                showMessage('No current session to download report for', 'error');
+                return;
+            }
+            downloadSessionReport(currentSessionName);
+        }
+
+        async function downloadSessionReport(sessionName) {
+            try {
+                const response = await fetch(`/download/${sessionName}/classification_report.txt`);
+                
+                if (!response.ok) {
+                    throw new Error('Report not found');
+                }
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `classification_report_${sessionName}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                
+                showMessage('Report downloaded successfully!', 'success');
+                
+            } catch (error) {
+                showMessage(`Error downloading report: ${error.message}`, 'error');
+            }
+        }
+
+        async function viewSessionDetails(sessionName) {
+            try {
+                const response = await fetch(`/results/${sessionName}`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    showMessage(`Error loading session details: ${data.error}`, 'error');
+                    return;
+                }
+                
+                // Create a modal or detailed view
+                let detailsHtml = `
+                    <div style="background: white; padding: 30px; border-radius: 10px; max-width: 800px; margin: 20px auto; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                        <h3>📁 Session Details: ${sessionName.replace('classification_', '').replace('_', ' at ')}</h3>
+                        <div style="margin: 20px 0;">
+                            <h4>📊 File Structure:</h4>
+                `;
+                
+                // Building Plans
+                if (data.structure.building_plans && Object.keys(data.structure.building_plans).length > 0) {
+                    detailsHtml += '<div style="margin: 10px 0;"><strong>🏗️ Building Plans:</strong></div>';
+                    for (const [planType, files] of Object.entries(data.structure.building_plans)) {
+                        detailsHtml += `<div style="margin-left: 20px;">📋 ${planType}: ${files.length} files</div>`;
+                    }
+                }
+                
+                // Documents
+                if (data.structure.documents && data.structure.documents.length > 0) {
+                    detailsHtml += `<div style="margin: 10px 0;"><strong>📄 Documents:</strong> ${data.structure.documents.length} files</div>`;
+                }
+                
+                detailsHtml += `
+                        </div>
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button class="btn" onclick="closeSessionDetails()" style="margin-right: 10px;">Close</button>
+                            <button class="btn" onclick="downloadSessionReport('${sessionName}')">📄 Download Report</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.id = 'sessionDetailsOverlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.7);
+                    z-index: 1000;
+                    overflow-y: auto;
+                `;
+                overlay.innerHTML = detailsHtml;
+                
+                document.body.appendChild(overlay);
+                
+                // Close on clicking overlay
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        closeSessionDetails();
+                    }
+                });
+                
+            } catch (error) {
+                showMessage(`Error loading session details: ${error.message}`, 'error');
+            }
+        }
+
+        function closeSessionDetails() {
+            const overlay = document.getElementById('sessionDetailsOverlay');
+            if (overlay) {
+                document.body.removeChild(overlay);
             }
         }
 

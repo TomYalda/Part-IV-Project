@@ -40,8 +40,9 @@ from classification_pipeline import ClassificationPipeline
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB max file size
 
-# Ensure temporary directory exists
+# Ensure temporary and demo results directories exist
 os.makedirs("tmp", exist_ok=True)
+os.makedirs("demo_results", exist_ok=True)
 
 class ClassificationDemo:
     """Demo wrapper around the existing ClassificationPipeline for web interface"""
@@ -172,6 +173,35 @@ class ClassificationDemo:
                     
                     results['files'].append(file_result)
                 
+                # Step 4: Organize and save results to persistent storage
+                if progress_callback:
+                    progress_callback("Stage 4: Organizing and saving results...", 95)
+                
+                # Create demo results directory with timestamp
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                demo_output_dir = os.path.join("demo_results", f"classification_{timestamp}")
+                
+                # Use pipeline's organize_results method to save classified images
+                results_summary = self.pipeline.organize_results(demo_output_dir, building_classifications, plan_classifications, temp_dir)
+                
+                # Save detailed report
+                self.pipeline.save_results_report(demo_output_dir, building_classifications, plan_classifications, results_summary, time.time() - start_time)
+                
+                results['stages'].append({
+                    'name': 'Results Storage',
+                    'status': 'completed',
+                    'details': f"Saved {results_summary['total_images']} images to {demo_output_dir}",
+                    'timestamp': datetime.now().isoformat()
+                })
+                
+                # Add output directory info to results
+                results['output_directory'] = demo_output_dir
+                results['saved_files'] = {
+                    'building_plans_dir': os.path.join(demo_output_dir, "building_plans"),
+                    'documents_dir': os.path.join(demo_output_dir, "documents"),
+                    'classification_report': os.path.join(demo_output_dir, "classification_report.txt")
+                }
+                
                 # Add summary statistics
                 results['summary'] = {
                     'total_files': len(results['files']),
@@ -183,7 +213,7 @@ class ClassificationDemo:
                 results['processing_time'] = time.time() - start_time
                 
                 if progress_callback:
-                    progress_callback("Classification complete!", 100)
+                    progress_callback("Classification and storage complete!", 100)
                 
         except Exception as e:
             print(f"Error in processing: {e}")
@@ -274,6 +304,143 @@ def status():
         'models_loaded': demo.is_loaded,
         'uptime': time.time()
     })
+
+@app.route('/results')
+def list_results():
+    """List all saved classification results"""
+    try:
+        results_dirs = []
+        demo_results_path = "demo_results"
+        
+        if os.path.exists(demo_results_path):
+            for dirname in sorted(os.listdir(demo_results_path), reverse=True):
+                dir_path = os.path.join(demo_results_path, dirname)
+                if os.path.isdir(dir_path) and dirname.startswith('classification_'):
+                    
+                    # Get directory info
+                    dir_info = {
+                        'name': dirname,
+                        'path': dir_path,
+                        'timestamp': dirname.replace('classification_', ''),
+                        'created': os.path.getctime(dir_path)
+                    }
+                    
+                    # Count files in subdirectories
+                    building_plans_dir = os.path.join(dir_path, "building_plans")
+                    documents_dir = os.path.join(dir_path, "documents")
+                    
+                    building_count = 0
+                    document_count = 0
+                    plan_types = []
+                    
+                    if os.path.exists(building_plans_dir):
+                        # Count files in building_plans and its subdirectories
+                        for root, dirs, files in os.walk(building_plans_dir):
+                            building_count += len([f for f in files if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+                            # Get plan type names from subdirectories
+                            if root != building_plans_dir:
+                                plan_types.append(os.path.basename(root))
+                    
+                    if os.path.exists(documents_dir):
+                        document_count = len([f for f in os.listdir(documents_dir) 
+                                            if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+                    
+                    dir_info.update({
+                        'building_plans': building_count,
+                        'documents': document_count,
+                        'plan_types': list(set(plan_types)),
+                        'total_files': building_count + document_count
+                    })
+                    
+                    results_dirs.append(dir_info)
+        
+        return jsonify({
+            'results': results_dirs,
+            'total_sessions': len(results_dirs)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Error listing results: {str(e)}'}), 500
+
+@app.route('/results/<session_name>')
+def get_result_details(session_name):
+    """Get detailed information about a specific classification session"""
+    try:
+        session_path = os.path.join("demo_results", session_name)
+        
+        if not os.path.exists(session_path):
+            return jsonify({'error': 'Session not found'}), 404
+        
+        # Read classification report if available
+        report_path = os.path.join(session_path, "classification_report.txt")
+        report_content = ""
+        if os.path.exists(report_path):
+            with open(report_path, 'r', encoding='utf-8') as f:
+                report_content = f.read()
+        
+        # Get file structure
+        structure = {
+            'building_plans': {},
+            'documents': []
+        }
+        
+        building_plans_dir = os.path.join(session_path, "building_plans")
+        documents_dir = os.path.join(session_path, "documents")
+        
+        # Get building plans organized by type
+        if os.path.exists(building_plans_dir):
+            for item in os.listdir(building_plans_dir):
+                item_path = os.path.join(building_plans_dir, item)
+                if os.path.isdir(item_path):
+                    # Plan type subdirectory
+                    structure['building_plans'][item] = [
+                        f for f in os.listdir(item_path) 
+                        if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+                    ]
+                elif item.lower().endswith(('.jpg', '.jpeg', '.png')):
+                    # Direct files in building_plans (Unknown/Error cases)
+                    if 'uncategorized' not in structure['building_plans']:
+                        structure['building_plans']['uncategorized'] = []
+                    structure['building_plans']['uncategorized'].append(item)
+        
+        # Get documents
+        if os.path.exists(documents_dir):
+            structure['documents'] = [
+                f for f in os.listdir(documents_dir) 
+                if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+            ]
+        
+        return jsonify({
+            'session_name': session_name,
+            'session_path': session_path,
+            'report': report_content,
+            'structure': structure,
+            'has_report': os.path.exists(report_path)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Error getting session details: {str(e)}'}), 500
+
+@app.route('/download/<session_name>/<path:file_path>')
+def download_result_file(session_name, file_path):
+    """Download a specific file from the results"""
+    try:
+        full_path = os.path.join("demo_results", session_name, file_path)
+        
+        if not os.path.exists(full_path) or not os.path.isfile(full_path):
+            return jsonify({'error': 'File not found'}), 404
+        
+        # Security check: ensure path is within demo_results
+        abs_demo_path = os.path.abspath("demo_results")
+        abs_file_path = os.path.abspath(full_path)
+        
+        if not abs_file_path.startswith(abs_demo_path):
+            return jsonify({'error': 'Invalid file path'}), 403
+        
+        return send_file(full_path, as_attachment=True)
+        
+    except Exception as e:
+        return jsonify({'error': f'Error downloading file: {str(e)}'}), 500
 
 if __name__ == '__main__':
     print("Starting Building Plan Classification Demo v2...")

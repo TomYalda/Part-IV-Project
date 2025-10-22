@@ -184,54 +184,96 @@ class ClassificationPipeline:
         print(f"Classifying {len(building_plan_paths)} building plans for plan types...")
         
         plan_classifications = {}
-        
-        # Process files one by one to avoid hanging issues with batch processing
-        # This matches the approach that works in testModel.py
         total_plans = len(building_plan_paths)
         
-        for i, img_path in enumerate(building_plan_paths):
+        # Create temporary directory and copy files (matches testModel.py approach)
+        import tempfile
+        import shutil
+        
+        with tempfile.TemporaryDirectory(dir="tmp") as yolo_temp_dir:
+            if progress_callback:
+                progress_callback("YOLO Classification: Preparing files for batch processing...", 70)
+            
+            # Copy building plan files to temp directory for YOLO batch processing
+            # This allows YOLO to process a directory (like testModel.py) which is much faster
+            file_mapping = {}  # Map temp filenames back to original paths
+            
+            for i, img_path in enumerate(building_plan_paths):
+                filename = os.path.basename(img_path)
+                temp_path = os.path.join(yolo_temp_dir, filename)
+                shutil.copy2(img_path, temp_path)
+                file_mapping[temp_path] = img_path
+            
+            if progress_callback:
+                progress_callback(f"YOLO Classification: Processing {total_plans} plans...", 75)
+            
             try:
-                # Process single image at a time (this approach works reliably)
+                # Process directory like testModel.py (much faster than individual files)
                 predictions = self.plan_classifier.predict(
-                    source=img_path,  # Single file path
-                    stream=False,     # No streaming for single files
-                    verbose=False     # Reduce output noise
+                    source=yolo_temp_dir,  # Pass directory like testModel.py
+                    stream=True,  # Use streaming like testModel.py
+                    verbose=False  # Reduce output noise
                 )
                 
-                # Get the first (and only) result
-                result = predictions[0] if predictions else None
+                processed_count = 0
+                for result in predictions:
+                    processed_count += 1
+                    
+                    # Map back to original path
+                    original_path = file_mapping.get(result.path, result.path)
+                    
+                    if result.probs is None:
+                        print(f"No probabilities for {result.path}")
+                        plan_classifications[original_path] = {
+                            'plan_type': 'Unknown',
+                            'confidence': 0.0
+                        }
+                    else:
+                        probs = result.probs.data
+                        
+                        # Get prediction (exact same logic as testModel.py)
+                        predicted_index = np.array(probs).argmax()
+                        predicted_name = self.plan_classifier.names[predicted_index]
+                        confidence = float(probs[predicted_index])  # Convert to Python float
+                        
+                        plan_classifications[original_path] = {
+                            'plan_type': predicted_name,
+                            'confidence': confidence
+                        }
+                    
+                    # More frequent progress updates for better frontend responsiveness
+                    if progress_callback and processed_count % max(1, total_plans // 10) == 0:
+                        progress = 75 + (processed_count / total_plans) * 20  # YOLO takes 75-95% of total progress
+                        progress_callback(f"YOLO Classification: {processed_count}/{total_plans} plans processed", progress)
                 
-                if result is None or result.probs is None:
-                    print(f"No probabilities for {img_path}")
-                    plan_classifications[img_path] = {
-                        'plan_type': 'Unknown',
-                        'confidence': 0.0
-                    }
-                    continue
-
-                probs = result.probs.data
-
-                # Get prediction (exact same logic as testModel.py)
-                predicted_index = np.array(probs).argmax()
-                predicted_name = self.plan_classifier.names[predicted_index]
-                confidence = float(probs[predicted_index])  # Convert to Python float
-                
-                plan_classifications[img_path] = {
-                    'plan_type': predicted_name,
-                    'confidence': confidence
-                }
-                
-                # Progress callback
+                # Final progress update
                 if progress_callback:
-                    progress = 70 + ((i + 1) / total_plans) * 25  # YOLO takes 70-95% of total progress
-                    progress_callback(f"YOLO Classification: {i+1}/{total_plans} plans classified", progress)
+                    progress_callback(f"YOLO Classification: Completed {processed_count} plans", 95)
                     
             except Exception as e:
-                print(f"Error processing {img_path}: {e}")
-                plan_classifications[img_path] = {
-                    'plan_type': 'Error',
-                    'confidence': 0.0
-                }
+                print(f"Error in batch processing: {e}")
+                # Fallback to individual processing if batch fails
+                for i, img_path in enumerate(building_plan_paths):
+                    try:
+                        predictions = self.plan_classifier.predict(source=img_path, stream=False, verbose=False)
+                        result = predictions[0] if predictions else None
+                        
+                        if result is None or result.probs is None:
+                            plan_classifications[img_path] = {'plan_type': 'Unknown', 'confidence': 0.0}
+                        else:
+                            probs = result.probs.data
+                            predicted_index = np.array(probs).argmax()
+                            predicted_name = self.plan_classifier.names[predicted_index]
+                            confidence = float(probs[predicted_index])
+                            plan_classifications[img_path] = {'plan_type': predicted_name, 'confidence': confidence}
+                        
+                        if progress_callback:
+                            progress = 75 + ((i + 1) / total_plans) * 20
+                            progress_callback(f"YOLO Classification (fallback): {i+1}/{total_plans} plans processed", progress)
+                            
+                    except Exception as fallback_error:
+                        print(f"Error processing {img_path}: {fallback_error}")
+                        plan_classifications[img_path] = {'plan_type': 'Error', 'confidence': 0.0}
         
         return plan_classifications
     
